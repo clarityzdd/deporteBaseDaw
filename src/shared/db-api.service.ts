@@ -21,4 +21,7 @@ export class DbApiService {
       .map(resp => this.currentTourney = resp);
   }
 
+  getCurrentTourney() {
+    return this.currentTourney;
+  }
 }

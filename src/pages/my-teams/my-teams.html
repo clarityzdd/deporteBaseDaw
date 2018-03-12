@@ -22,6 +22,16 @@
 
 <ion-content padding>
 
+  <ion-list>
+    <ion-list-header>Mis equipos favoritos</ion-list-header>
+    <button ion-item *ngFor="let item of favorites"
+            (click) = "favoriteTapped(item)">
+      <ion-icon name="star"></ion-icon>
+      {{item.team.name}}
+      <p>{{item.tournament.name}}</p>
+    </button>
+  </ion-list>
+
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid harum ipsam iusto laudantium molestias nemo
     optio. Eveniet sunt unde voluptatem.</p>
   <p>Ab, adipisci architecto dolorem ea, esse eum maxime necessitatibus nemo neque perferendis perspiciatis porro quae
