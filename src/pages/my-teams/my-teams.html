@@ -22,25 +22,48 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-list-header>Mis equipos favoritos</ion-list-header>
-    <button ion-item *ngFor="let item of favorites"
-            (click) = "favoriteTapped(item)">
-      <ion-icon name="star"></ion-icon>
-      {{item.team.name}}
-      <p>{{item.tournament.name}}</p>
+  <ng-template>
+    <ion-card>
+      <ion-card-header>Sin equipos favoritos</ion-card-header>
+      <ion-card-content>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi consequuntur corporis facilis ipsa minima natus
+          reiciendis vitae? Delectus dolorem est maiores nam quia reprehenderit, voluptatibus?</p>
+        <p>Commodi dolorum, eaque facilis fugit in ipsum, iste itaque labore minima necessitatibus nesciunt nulla
+          provident quae quisquam similique totam, ullam ut veritatis voluptates voluptatibus. Qui.</p>
+      </ion-card-content>
+
+      <button ion-button color="secondary"
+              round outline
+              (click)="goToTournaments()">Torneos
+        <ion-icon padding-left name="search"></ion-icon>
+      </button>
+    </ion-card>
+  </ng-template>
+
+  <ion-card *ngIf="favorites; else nofav">
+    <ion-list>
+      <ion-list-header>Mis equipos favoritos</ion-list-header>
+      <button ion-item *ngFor="let item of favorites"
+              (click) = "favoriteTapped(item)">
+        <ion-icon name="star"></ion-icon>
+        {{item?.team?.name}}
+        <p>{{item?.tournament?.name}}</p>
+      </button>
+    </ion-list>
+
+    <ion-card-content>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores consectetur, doloremque, facilis illo
+        magni maxime molestias nobis nostrum numquam qui sint sit velit? Blanditiis.</p>
+      <p>Culpa dignissimos dolorum, eius eligendi error et explicabo facere id inventore necessitatibus omnis possimus
+        quam quibusdam quod ratione tempore voluptas. Dicta ducimus eum maiores nemo?</p>
+    </ion-card-content>
+
+    <button ion-button color="secondary"
+            round outline
+            (click)="goToTournaments()">Torneos
+      <ion-icon padding-left name="search"></ion-icon>
     </button>
-  </ion-list>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid harum ipsam iusto laudantium molestias nemo
-    optio. Eveniet sunt unde voluptatem.</p>
-  <p>Ab, adipisci architecto dolorem ea, esse eum maxime necessitatibus nemo neque perferendis perspiciatis porro quae
-    quaerat, quidem soluta unde voluptates?</p>
-
-  <button ion-button color="secondary"
-          round outline
-          (click)="goToTournaments()">Torneos
-          <ion-icon padding-left name="search"></ion-icon>
-  </button>
+  </ion-card>
 
 </ion-content>

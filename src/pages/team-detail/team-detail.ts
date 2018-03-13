@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import * as _ from 'lodash';
 import {DbApiService} from "../../shared/db-api.service";
 import {TeamHomePage} from "../team-home/team-home";
+import * as moment from 'moment';
 
 /**
  * Generated class for the TeamDetailPage page.
@@ -21,10 +22,16 @@ export class TeamDetailPage {
   team:any={};
   games:any[];
   private tourneyData:any;
+  teamStanding:any={};
+  dateFilter:string;
+  allGames:any[];
+  useDateFilter:boolean=true;
+  isFollowing:boolean=false;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private dbapi:DbApiService) {
+              private dbapi:DbApiService,
+              private toastController:ToastController) {
     this.team = (this.navCtrl as any).rootParams;
 
   }
@@ -52,6 +59,10 @@ export class TeamDetailPage {
       };
     })
       .value();
+
+    this.allGames = this.games;
+    this.teamStanding= _.find(this.tourneyData.standings, {'teamId':this.team.id});
+
     console.log("partidos", this.games);
   }
 
@@ -69,6 +80,25 @@ export class TeamDetailPage {
     else {
       return "";
     }
+  }
+
+  dateChanged() {
+    if (this.useDateFilter)
+      this.games = _.filter(this.allGames, g =>
+        moment(g.time).isSameOrAfter(this.dateFilter, 'day')
+      );
+    else
+      this.game=this.allGames;
+  }
+
+  toggleFollow() {
+    this.isFollowing = !this.isFollowing;
+    let toast = this.toastController.create({
+      message: `Ahora following es ${this.isFollowing}`,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   goToTeam(game) {

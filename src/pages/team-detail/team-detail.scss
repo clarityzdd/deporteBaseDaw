@@ -1,3 +1,7 @@
 page-team-detail {
-
+  ion-list ion-col {
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+  }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
 import {TournamentsPage} from "../tournaments/tournaments";
 import {TeamHomePage} from "../team-home/team-home";
 import {DbApiService} from "../../shared/db-api.service";
@@ -29,7 +29,8 @@ export class MyTeamsPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private dbApi: DbApiService) {
+              private dbApi: DbApiService,
+              private loadingController: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -40,7 +41,7 @@ export class MyTeamsPage {
     this.navCtrl.push(TournamentsPage);
   }
 
-  favoriteTapped($event,item){
+  favoriteTapped(item){
     let loader = this.loadingController.create({
       content: 'Accediendo a los datos. .',
       dismissOnPageChange: true
