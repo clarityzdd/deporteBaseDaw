@@ -20,6 +20,8 @@ import {AngularFireDatabaseModule} from "angularfire2/database/database.module";
 import {AngularFireAuthModule} from "angularfire2/auth/auth.module";
 import {DbApiService} from "../shared/db-api.service";
 import {AngularFireModule} from "angularfire2/index";
+import {IonicStorageModule} from "@ionic/storage/dist/index";
+import {UserSettingsService} from "../shared/user-settings.service";
 
 
 export const firebaseConfig = {
@@ -48,6 +50,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -65,7 +68,8 @@ export const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireDatabase,
-    DbApiService
+    DbApiService,
+    UserSettingsService
   ]
 })
 export class AppModule {}
